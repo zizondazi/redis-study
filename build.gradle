@@ -1,0 +1,31 @@
+plugins {
+    id("java")
+    id "io.spring.dependency-management" version "1.0.7.RELEASE"
+}
+
+group = "org.example"
+version = "1.0-SNAPSHOT"
+
+repositories {
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "io.projectreactor:reactor-bom:2023.0.5"
+    }
+}
+
+dependencies {
+    implementation 'redis.clients:jedis:5.1.2'
+    implementation 'io.projectreactor:reactor-core'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.7'
+    testImplementation(platform("org.junit:junit-bom:5.10.0"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.7'
+    testImplementation 'io.projectreactor:reactor-test'
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
